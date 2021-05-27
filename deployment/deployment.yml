@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverapp-test
+spec:
+  replicas: 2
+  selector:    
+    matchLabels:      
+       app: serverapp  
+  template:    
+    metadata:      
+      labels:        
+        app: serverapp
+    spec:
+      containers:
+        - name: server-app
+          image: server-image:1.0.1
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports: 
+            - containerPort: 80
